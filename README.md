@@ -1,6 +1,8 @@
 # zabbix-nut
 
-Zabbix template & script to monitor UPS exposed through NUT (https://networkupstools.org)
+Zabbix template & script to monitor UPS exposed through NUT (https://networkupstools.org).
+
+Currently only basic parameters are gathered (which are available on my UPS). Feel free to do PR to add other stuff, preferably in form of low-level discovery so that if it's not available - items are not created.
 
 Single Python script that emits all information needed for discovery & data gathering in a single JSON.
 All items are defined as `Dependent` and extract relevant data using JSONPath queries.
@@ -66,6 +68,7 @@ All items are defined as `Dependent` and extract relevant data using JSONPath qu
   - Voltage out of bounds
   - UPS status is not healthy
   - UPS is calibrating/in bypass/charging
+- Optional authentication (fill `{$NUT_USERNAME}` and `{$NUT_PASSWORD}` macros to enable)
 - Zabbix agent passive checks. Can be converted to active if needed.
 - Macros to customize triggers
 
