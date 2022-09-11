@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.2</version>
-    <date>2022-09-10T15:16:15Z</date>
+    <date>2022-09-10T21:02:45Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -268,6 +268,11 @@
                                     <name>UPS &quot;{#UPS_NAME}&quot; status is not healthy: {ITEM.LASTVALUE}</name>
                                     <priority>HIGH</priority>
                                 </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=&quot;OB&quot;</expression>
+                                    <name>UPS &quot;{#UPS_NAME}&quot; status is on battery</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
                             </trigger_prototypes>
                         </item_prototype>
                     </item_prototypes>
@@ -327,8 +332,8 @@
                 </macro>
                 <macro>
                     <macro>{$NUT_STATUS_OK}</macro>
-                    <value>^OL|CHRG|TRIM|BOOST|CAL$</value>
-                    <description>Regex of statuses which are considered OK</description>
+                    <value>^OL|OB|CHRG|TRIM|BOOST|CAL$</value>
+                    <description>Regex of statuses which are considered healthy</description>
                 </macro>
                 <macro>
                     <macro>{$NUT_TEMP_CRIT}</macro>
@@ -396,6 +401,10 @@
                 <mapping>
                     <value>none</value>
                     <newvalue>Unknown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>OB</value>
+                    <newvalue>On Battery</newvalue>
                 </mapping>
                 <mapping>
                     <value>OFF</value>
